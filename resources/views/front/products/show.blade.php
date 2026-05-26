@@ -10,7 +10,14 @@
             <p class="text-2xl font-bold text-green-600 mt-4">${{ number_format($product->price, 2) }}</p>
             <p class="mt-4">{{ $product->description }}</p>
             <p class="mt-2 text-sm text-gray-500">Stock: {{ $product->stock }}</p>
-            <a href="#" class="mt-6 inline-block bg-blue-500 text-white px-6 py-2 rounded">Add to Cart</a>
+
+            <!-- Add to Cart Form -->
+            <form action="{{ route('cart.add', $product) }}" method="POST" class="mt-6">
+                @csrf
+                <label for="quantity" class="mr-2">Quantity:</label>
+                <input type="number" name="quantity" value="1" min="1" class="w-20 border px-2 py-1 rounded">
+                <button type="submit" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded ml-2">Add to Cart</button>
+            </form>
         </div>
     </div>
 </div>
