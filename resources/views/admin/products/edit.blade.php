@@ -130,7 +130,7 @@
             </div>
             @endif
 
-            <!-- Add More Images -->
+                       <!-- Add More Images -->
             <div>
                 <label for="images" class="block text-sm font-medium text-gray-700">Add More Images</label>
                 <input type="file" name="images[]" id="images" accept="image/*" multiple
@@ -141,18 +141,19 @@
                 @enderror
             </div>
 
-            <!-- Submit Button -->
-            <div class="flex justify-end gap-4">
+            <!-- Submit Buttons -->
+            <div class="flex justify-end gap-4 pt-6 border-t border-gray-200">
                 <a href="{{ route('admin.products.index') }}" 
-                   class="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50">
+                   class="px-6 py-2.5 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 font-medium transition">
                     Cancel
                 </a>
                 <button type="submit" 
-                        class="px-6 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 shadow-md">
-                    Update Product
+                        class="px-8 py-2.5 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-lg hover:from-indigo-700 hover:to-purple-700 font-semibold shadow-lg hover:shadow-xl transition transform hover:-translate-y-0.5">
+                    💾 Update Product
                 </button>
             </div>
         </form>
     </div>
 </div>
+
 @endsection
