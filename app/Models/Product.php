@@ -2,20 +2,31 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Product extends Model
 {
+    use HasFactory;
+
     protected $fillable = [
-        'vendor_id', 'category_id', 'name', 'slug', 'description',
-        'price', 'stock', 'sku', 'featured_image', 'is_active'
+        'name',
+        'slug',
+        'description',
+        'price',
+        'stock',
+        'category_id',
+        'is_active',
+        'featured_image',
     ];
 
-    public function vendor()
-    {
-        return $this->belongsTo(User::class, 'vendor_id');
-    }
+    protected $casts = [
+        'price' => 'decimal:2',
+        'is_active' => 'boolean',
+    ];
 
+    // Relationships
     public function category()
     {
         return $this->belongsTo(Category::class);
@@ -23,16 +34,18 @@ class Product extends Model
 
     public function images()
     {
-        return $this->hasMany(ProductImage::class);
+        return $this->hasMany(ProductImage::class)->orderBy('sort_order');
     }
 
-    public function reviews()
+    public function featuredImage()
     {
-        return $this->hasMany(Review::class);
+        return $this->hasMany(ProductImage::class)->where('is_featured', true);
     }
 
-    public function cartItems()
+    // Mutator for slug
+    public function setNameAttribute($value)
     {
-        return $this->hasMany(Cart::class);
+        $this->attributes['name'] = $value;
+        $this->attributes['slug'] = Str::slug($value);
     }
 }
